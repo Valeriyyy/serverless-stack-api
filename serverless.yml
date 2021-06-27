@@ -51,3 +51,10 @@ functions:
       - http:
           path: notes/{id}
           method: get
+
+  list:
+    handler: list.main
+    events:
+      - http:
+          path: notes
+          method: get
