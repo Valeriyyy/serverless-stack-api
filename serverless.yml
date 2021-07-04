@@ -24,6 +24,7 @@ provider:
   #
   environment:
     tableName: notes
+    stripeSecretKey: ${env:STRIPE_SECRET_KEY}
 
   iamRoleStatements:
     - Effect: Allow
@@ -74,6 +75,14 @@ functions:
     handler: delete.main
     events:
       - http:
-        path: notes/{id}
-        method: delete
-        authorizer: aws_iam
+          path: notes/{id}
+          method: delete
+          authorizer: aws_iam
+  
+  billing:
+    handler: billing.main
+    events:
+      - http:
+          path: billing
+          method: post
+          authorizer: aws_iam
